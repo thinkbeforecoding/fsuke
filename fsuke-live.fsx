@@ -72,7 +72,6 @@ fsi.AddPrinter(fun (Chroma c) -> chromaNames.[int c % 12] )
 
 /// Flat (~-) Chroma
 // Flat (b) is just one semitone under a given Chroma 
-
 let (~-) (c: Chroma) = c + -1<st>
 
 /// Sharp (~+) Chroma

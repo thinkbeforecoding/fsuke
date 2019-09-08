@@ -3,3 +3,4 @@ packages/
 paket-files/
 bin/
 obj/
+.ionide/

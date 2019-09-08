@@ -1,20 +1,23 @@
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-//          Ukulele Tabs in F#            //
-//                                        //
-//                ( o )==::               //
-//                                        //
-// By: Jeremie Chassaing                  //
-//                                        //
-// (Availpro - FastBooking / Accor)       //
-//                                        //
-// https://thinkbeforecoding.com          //
-//                                        //
-//                         @thinkb4coding //
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+let title =
+    """
+            //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+            //          Ukulele Tabs in F#            //
+            //                                        //
+            //                ( o )==::               //
+            //                                        //
+            //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+    """
 
+let speaker =
+    "Jeremie Chassaing"
 
+let company = 
+    [ "D-Edge"
+      "Accor" ]
 
+let website = "https://thinkbeforecoding.com"
 
+let twiter = @"thinkb4coding"
 
 
 
@@ -55,7 +58,29 @@ __SOURCE_DIRECTORY__ + "/UkeChords.jpg"
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Semitone measure
+
+
+
+
 
 
 
@@ -109,8 +134,41 @@ __SOURCE_DIRECTORY__ + "/UkeChords.jpg"
 
 
 
+/// %% Positive modulo on semitones
+/// SemitonesPerOctave
 
-/// %% Positive modulo
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // chroma
 // op chroma + semitone -> chroma
@@ -123,6 +181,24 @@ __SOURCE_DIRECTORY__ + "/UkeChords.jpg"
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// c, d, e ...: Chroma
 
 
 
@@ -174,82 +250,6 @@ __SOURCE_DIRECTORY__ + "/UkeChords.jpg"
 
 
 
-//let chromaNames = ["C"; "C#"; "D"; "D#"; "E"; "F"; "F#"; "G"; "G#"; "A"; "Bb"; "B"]
-//fsi.AddPrinter(fun (Chroma c) -> chromaNames.[int c % 12] )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/// Flat (~-) Chroma
-/// Sharp (~+) Chroma
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// c, d, e ...: Chroma
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -277,7 +277,44 @@ __SOURCE_DIRECTORY__ + "/UkeChords.jpg"
 
 
 
+(*
+let chromaNames = ["C"; "C#"; "D"; "D#"; "E"; "F"; "F#"; "G"; "G#"; "A"; "Bb"; "B"]
+let chromaName (Chroma c)= chromaNames.[int c % 12]
+fsi.AddPrinter(chromaName)
+fsi.AddPrinter(fun (n: Note) -> sprintf "%s%d" (chromaName (chroma n)) (oct n) )
+*)
+
+/// Flat (~-) Chroma
+/// Sharp (~+) Chroma
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // type Interval : Chroma -> Chroma
+// intervals
+
+
+
 
 
 
@@ -302,6 +339,7 @@ __SOURCE_DIRECTORY__ + "/UkeChords.jpg"
 
 
 // minor : Interval -> Interval
+
 
 
 
@@ -351,15 +389,15 @@ __SOURCE_DIRECTORY__ + "/UkeChords.jpg"
 
 
 
+
+
+
+
+
 // String = Note
 // Fret =  String * int<st> 
 
 
-// module String =
-//     let G = String (G 4)
-//     let C = String (C 4)
-//     let E = String (E 4)
-//     let A = String (A 4)
 
 
 
@@ -381,9 +419,40 @@ __SOURCE_DIRECTORY__ + "/UkeChords.jpg"
 
 
 
+
+(*
+module String =
+    let G = String (G 4)
+    let C = String (C 4)
+    let E = String (E 4)
+    let A = String (A 4)
+*)
 
 
 // fret : String -> Chroma -> Fret list 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // frets : String -> Chord -> Fret list seq 
 
@@ -408,31 +477,16 @@ __SOURCE_DIRECTORY__ + "/UkeChords.jpg"
 
 
 
-// combine : (Chord -> Fret list list) -> (Chord -> Fret list list) -> (Chord Fret list list) 
 
-// let (<.>) = combine
+// combine : (Chord -> Fret list seq) -> (Chord -> Fret list seq) -> (Chord Fret list seq) 
+let combine lx ly =
+    fun ch ->
+        seq {
+            for x in lx ch do
+            for y in ly ch do
+            yield x @ y }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+let (<.>) = combine
 
 
 // fretChoices Chord -> Fret list seq
@@ -462,87 +516,10 @@ __SOURCE_DIRECTORY__ + "/UkeChords.jpg"
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // fretChroma: Fret -> Chroma
-
 // tabChord: Fret list -> Chord
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // difficulty : Fret list -> int
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // tabs: Chord -> Fret list 
-
-
-
-
-
-
-
-
 
 
 
@@ -616,6 +593,6 @@ fsi.AddPrinter<Chord list> (fun cs ->
     string ""
 )
 
-[ m b; M d; m +f; M e ]
 
+[ m b; M d; m +f; M e ]
 *)

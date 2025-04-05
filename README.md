@@ -1,5 +1,7 @@
 # fsuke
 
+This repository has moved to Codeberg: https://codeberg.org/thinkbeforecoding/fsuke
+
 This is the content of the Ukulele Tabs in F# talk at Open FSharp San Francisco
 
 Why are ukulele tabs what they are ? Can we write a function that takes a chord and output tabs ?
